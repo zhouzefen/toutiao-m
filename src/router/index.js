@@ -38,7 +38,27 @@ const routes = [{
                 component: () =>
                     import ('@/views/my')
             }
+
         ]
+    },
+    {
+        path: '/search', // 默认子路由
+        name: 'search',
+        component: () =>
+            import ('@/views/search/index.vue')
+    },
+    {
+        path: `/article/:articleId`,
+        name: 'article',
+        component: () =>
+            import ('../views/article'),
+        props: true
+    },
+    {
+        name: 'user-profile',
+        path: '/user/profile',
+        component: () =>
+            import ('@/views/user-profile/index.vue')
     }
 ]
 const router = new Router({

@@ -15,7 +15,7 @@ export const setToken = (name, vaule) => {
     if (typeof vaule === 'object') {
         vaule = JSON.stringify(vaule)
     }
-    window.localStorage.getItem(name, vaule)
+    window.localStorage.setItem(name, vaule)
 }
 
 // 删除token

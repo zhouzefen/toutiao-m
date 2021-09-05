@@ -22,7 +22,9 @@
                     <span>{{userinfo.name}}</span>
                 </div>
                 <div class="right">
-                    <van-button size="mini" round>编辑资料</van-button>
+                    <van-button size="mini" round
+                    to="/user/profile"
+                    >编辑资料</van-button>
                 </div>
             </div>
             <div class="data_start">

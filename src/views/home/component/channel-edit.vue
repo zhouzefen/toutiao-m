@@ -49,8 +49,7 @@
 </template>
 
 <script>
-import {getChannelList,addUserChannel} from '@/api/channel.js'
-import {mapState} from '@/store.js'
+import {getChannelList,addUserChannel,deleteUserChannel} from '@/api/channel.js'
 import {setToken} from '@/utils/storage.js'
 export default {
   name: 'ChannelEdit',
@@ -73,6 +72,9 @@ export default {
   },
   computed: {
     //   ...mapState(['user']),
+    user(){
+        return this.$store.state.user
+    },
       recommendChannels(){
           const channels =[]
           this.allChannels.forEach(achannels => {
@@ -119,6 +121,8 @@ export default {
                 }else{
                     // 处理未登录状态
                     setToken('TOUTIAO_CHANNELS',this.userChannels)
+                   
+                    
                 }
            }catch(err){
                console.log(err)
@@ -136,11 +140,28 @@ export default {
                     this.$emit('onUndate',this.active - 1,true)
                 }
                 this.userChannels.splice(index,1)
+                this.deleteChannel(channel)
             }else{
                 // 完成
                 this.$emit('onUndate',index,false)
             }
+        },
+
+        async deleteChannel (channel) {
+            try {
+                if (this.user) {
+                // 已登录，将数据存储到线上
+                await deleteUserChannel(channel.id)
+                } else {
+                // 未登录，将数据存储到本地
+                setItem('channles', this.userChannels)
+                }
+            } catch (err) {
+                console.log(err)
+                this.$toast('删除频道失败，请稍后重试')
+            }
         }
+
   }
 }
 </script>

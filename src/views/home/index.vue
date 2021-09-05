@@ -4,7 +4,10 @@
              <van-button slot="title" type="info" class="searchBtn"
              size="mini"
              round
-             icon="search">搜索</van-button>
+             icon="search"
+             to="/search">
+             搜索
+             </van-button>
         </van-nav-bar>
 
         <van-tabs class="channel_tabs" v-model="active" swipeable animated>
